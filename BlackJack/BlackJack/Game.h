@@ -19,12 +19,12 @@ int GetRandom(int _min = 1, int _max = 14)
 
 
 // draw card
-int DrawCard(int _player[])
+void DrawCard(int _player[])
 {
 	for (int i = 0; i < ARRAY_SIZE(_player); i++)
 	{
 		// check cards
-		if (_player[i] == 0)
+		if (_player[i] == 0 || _player[i] == -858993460)
 		{
 			// draw card
 			_player[i] = GetRandom();
@@ -35,7 +35,6 @@ int DrawCard(int _player[])
 			continue;
 	}
 
-	return false;
 }
 
 
@@ -81,14 +80,17 @@ int GetRealCardFromRandom(int _randomCard)
 
 void VisibleCards()
 {
-	int cardsIngame[2] [21];
+	/// <summary>
+	/// [Player] [Card]
+	/// </summary>
+	int cardsIngame[2][21];
 	std::cout << "Player 1" << std::endl;
 
 	for (int i = 0; i < (ARRAY_SIZE(cardsIngame) / 2); i++)
 	{
 		// first card visible because it is player
 		int card = GetRealCardFromRandom(cardsIngame[0][i]);
-		PRINT_CARD(i, 3);
+		PRINT_CARD(i + 1, card);
 		cardsIngame[0][i];
 
 	}
